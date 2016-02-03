@@ -1,6 +1,11 @@
 # ForemanNetTemplates
 
-*Introdction here*
+This plugins aims to bring better support for advanced network configurations
+for The Foreman provisioning templates.
+
+It currently uses [os-net-config](https://github.com/openstack/os-net-config) as
+a backend, turning the network configuration of a host to files changed in the
+provisioning templates.
 
 ## Installation
 
@@ -13,7 +18,7 @@ for how to install Foreman plugins
 
 ## TODO
 
-*Todo list here*
+* BSD Support
 
 ## Contributing
 
@@ -21,7 +26,9 @@ Fork and send a Pull Request. Thanks!
 
 ## Copyright
 
-Copyright (c) *year* *your name*
+Copyright (c) 2016 Marek Hulan
+Copyright (c) 2016 Julien Pivotto
+Copyright (c) 2016 Ewoud Kohl
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

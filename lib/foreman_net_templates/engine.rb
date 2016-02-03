@@ -18,6 +18,8 @@ module ForemanNetTemplates
       Foreman::Plugin.register :foreman_net_templates do
         requires_foreman '>= 1.10'
 
+        allowed_template_helpers :build_network_config_files
+
         # Add permissions
         # security_block :foreman_net_templates do
         #   permission :view_foreman_net_templates, :'foreman_net_templates/hosts' => [:new_action]
@@ -58,9 +60,21 @@ module ForemanNetTemplates
     config.to_prepare do
       begin
         # Host::Managed.send(:include, ForemanNetTemplates::HostExtensions)
-        Foreman::Renderer.send(:include, ForemanNetTemplates::RendererExtensions)
       rescue => e
         Rails.logger.warn "ForemanNetTemplates: skipping engine hook (#{e})"
+      end
+    end
+
+    initializer 'foreman_net_templates.renderer_extensions' do |app|
+      ActionView::Base.send :include, ForemanNetTemplates::RendererExtensions
+    end
+
+    config.after_initialize do
+      # this does not work because of STI of controllers :-/
+      # ::Foreman::Renderer.send :include, ForemanNetTemplates::RendererExtensions
+      # we use this hack instead
+      (TemplatesController.descendants + [TemplatesController]).each do |klass|
+        klass.send(:include, ForemanNetTemplates::RendererExtensions)
       end
     end
 

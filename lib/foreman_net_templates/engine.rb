@@ -59,7 +59,8 @@ module ForemanNetTemplates
     # Include concerns in this config.to_prepare block
     config.to_prepare do
       begin
-        # Host::Managed.send(:include, ForemanNetTemplates::HostExtensions)
+        Host::Managed.send(:include, ForemanNetTemplates::HostExtensions)
+        Nic::Managed.send(:include, ForemanNetTemplates::NicExtensions)
       rescue => e
         Rails.logger.warn "ForemanNetTemplates: skipping engine hook (#{e})"
       end

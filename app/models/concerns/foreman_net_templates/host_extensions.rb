@@ -1,19 +1,14 @@
 module ForemanNetTemplates
   module HostExtensions
-    extend ActiveSupport::Concern
 
-    included do
-      # execute callbacks
+    # Returns a os_net_config compatible hash
+    # See https://github.com/openstack/os-net-config for the specs
+    def os_net_config
     end
 
-    # create or overwrite instance methods...
-    def instance_method_name
+    def os_net_config_json
+      os_net_config.to_json
     end
 
-    module ClassMethods
-      # create or overwrite class methods...
-      def class_method_name
-      end
-    end
   end
 end

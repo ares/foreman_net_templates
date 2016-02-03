@@ -1,5 +1,3 @@
-require 'deface'
-
 module ForemanNetTemplates
   class Engine < ::Rails::Engine
     engine_name 'foreman_net_templates'
